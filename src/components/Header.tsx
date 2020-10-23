@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import media from 'styled-media-query'
 
 const Nav = styled.div`
-  background-color: #fff;
+  background-color: #6E2594;
   border-bottom: 1px solid rgba(0, 0, 0, 0.0975);
 `;
 const NavHeader = styled.div`
   max-width: 1010px;
   padding: 26px 20px;
   width: 100%;
-  align-items: center;
+  align-items: flex-start;
   margin: 0 auto;
   color: black;
   display: inline-block;
@@ -22,13 +22,15 @@ const NavHeader = styled.div`
   `}
 `;
 const NavLeft = styled.div`
+
   width: 33.333%;
   text-align: left;
   display: inline-block;
   ${media.lessThan('medium')`
-      width: 20%;
-      margin-right: 20px;
+      width: 100%;
+      display: flex;
   `}
+  
 `;
 const NavCenter = styled.div`
   width: 33.333%;
@@ -37,6 +39,7 @@ const NavCenter = styled.div`
   
   ${media.lessThan('medium')`
       width: 20%;
+      display: flex;
   `}
 `;
 const Input = styled.input`
@@ -58,9 +61,9 @@ const Input = styled.input`
   }
 `;
 const NavRight = styled.div`
-  width: 33.333%;
+  width: 33.3%;
   text-align: right;
-  display: inline-block;
+  display: block;
   svg {
     margin-right: 20px;
   }
@@ -78,7 +81,7 @@ const Header = ({title}) => {
     <Nav>
       <NavHeader>
         <NavLeft>{title}</NavLeft>
-        <NavCenter>
+        {/* <NavCenter>
           <Input type="text" placeholder="Search" />
         </NavCenter>
         <NavRight>
@@ -91,7 +94,7 @@ const Header = ({title}) => {
           <MenuLink href="#">
             Opa 3
           </MenuLink>
-        </NavRight>
+        </NavRight> */}
       </NavHeader>
     </Nav>
     );

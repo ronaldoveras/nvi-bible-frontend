@@ -1,10 +1,11 @@
-const { useState } = require("react");
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import * as S from './styles'
+const { useState, useEffect } = require("react");
+import * as S from '../src/styles/styles'
 import Header from '../src/components/Header'
 import Footer from '../src/components/Footer'
-import { Typography } from '@material-ui/core';
+import styled from 'styled-components';
+import FormTitle from '../src/components/FormTitle';
+import Bar from '../src/components/Bar';
+import {loadBooks, retrieveVerse} from '../src/services/integration';
 
 const Home = ({ books }) => {
 
@@ -14,11 +15,9 @@ const Home = ({ books }) => {
   const [selectedVerse, setSelectedVerse] = useState("");
 
   async function buscarVerse() {
-    const res = await fetch('https://nameless-mesa-59302.herokuapp.com/api/v1/nvi?id=' + book + '&cap=' + chapter + '&vs=' + verse)
-    const json = await res.text()
+    const json = await retrieveVerse(book,chapter, verse)
     setSelectedVerse(json)
     return { props: { selectedVerse: json } }
-
   };
 
 
@@ -40,8 +39,11 @@ const Home = ({ books }) => {
 
   return (
     <S.Container>
-      {/* <Header title='NVI' /> */}
+      <Header title='NVI Bible' />
+      <HeaderImage />
+      <FormTitle />
       <S.FormSection >
+        <div>
         <label htmlFor="book-select">Choose a Book: </label>
         <S.StyledSelect
           id="book-select"
@@ -53,6 +55,8 @@ const Home = ({ books }) => {
           })}
 
         </S.StyledSelect>
+        </div>
+        <div>
         <label htmlFor="chapter-select">Choose a Chapter: </label>
         <S.StyledSelect
           id="chapter-select"
@@ -64,6 +68,8 @@ const Home = ({ books }) => {
             return <option key={i} value={i}>{i}</option>
           })}
         </S.StyledSelect>
+        </div>
+        <div>
         <label htmlFor="verse-select">Choose a Verse: </label>
         <S.StyledSelect
           id="verse-select"
@@ -75,32 +81,23 @@ const Home = ({ books }) => {
             return <option key={i} value={i}>{i}</option>
           })}
         </S.StyledSelect>
+        </div>
       </S.FormSection>
 
       <S.CentralizedSection>
         <S.SearchButton onClick={buscarVerse}>Search</S.SearchButton>
         <S.ContextButton>Contexto</S.ContextButton>
       </S.CentralizedSection>
+      
+      <Bar/>
 
       <S.CentralizedSection>
-        <S.Card >
-          <CardContent >
-            <Typography variant="h5" component="h2">
-              Selected Verse
-            </Typography>
-            <Typography color="textSecondary" variant="h2" >
-              {book} {chapter}:{verse}
-            </Typography>
-            <Typography variant="h5" color="textPrimary" >
-              {selectedVerse}
-            </Typography>
-
-          </CardContent>
-        </S.Card>
+       {selectedVerse.length > 0 &&  <h3>           {selectedVerse}         </h3> }
       </S.CentralizedSection>
-      <S.CentralizedSection>
+      
+      <S.FooterSection>
         <Footer />
-      </S.CentralizedSection>
+      </S.FooterSection>
 
     </S.Container>
 
@@ -109,15 +106,17 @@ const Home = ({ books }) => {
 
 export default Home
 
-
+const HeaderImage = styled.img.attrs(
+  props => ({'src': '/bible.jpg'})
+)`
+  width: 100%;
+  height: 200px;
+`;
 
 
 export async function getStaticProps() {
-  const res = await fetch('https://nameless-mesa-59302.herokuapp.com/api/v1/books')
-  const json = await res.json()
-  console.log(json)
-  //return { books: json }
-  return { props: { books: json } }
+  const dados = await loadBooks()
+  return { props: { books: dados} };
 };
 
 

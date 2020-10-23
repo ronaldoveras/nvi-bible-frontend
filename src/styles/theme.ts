@@ -24,11 +24,11 @@ export default {
     primary: '#F231A5',
     primaryHover: '#E20E8D',
     secondary: '#3CD3C1',
-    mainBg: '#030518',
+    mainBg: '#06092B',
     boxBg: '#FAFAFA',
     texts: '#030517',
     white: '#FFFFFF',
-    black: '#000000',
+    black: '#030517',
     gray: '#7B7373'
   },
   spacings: {

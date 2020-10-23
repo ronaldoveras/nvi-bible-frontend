@@ -34,9 +34,9 @@ export const Container = styled.div`
 
   background: ${theme.colors.mainBg};
 
-  @media (min-width: 1024px) {
+  /* @media (min-width: 1024px) {
     flex-wrap: nowrap;
-  }
+  } */
   `}
 `;
 
@@ -72,7 +72,8 @@ export const SearchButton = styled.button`
       padding: 0.25em 1em;
       border-radius: 3px;
       /* Color the border and text with theme.main */
-      background: linear-gradient(45deg, #757d77 30%, #a7b0a9 90%);
+      /* background: linear-gradient(45deg, #757d77 30%, #a7b0a9 90%); */
+      background: #808080
   `}
 `
 
@@ -84,7 +85,7 @@ export const ContextButton = styled.button`
   padding: 0.25em 1em;
   border-radius: 3px;
   /* Color the border and text with theme.main */
-  background: linear-gradient(45deg, #d5dbd6 30%, #bec2bf 90%);
+  background: #808080;
 
   `}
 `
@@ -98,7 +99,12 @@ export const FormSection = styled.section`
   justify-content: center;
   align-items: center;
   padding-top: 40px;
+  margin-top: 30px;
+  margin-bottom: 20px; 
+ 
 `
+
+
 
 export const Card = styled.div`
  ${({ theme }) => css`
@@ -109,6 +115,14 @@ export const Card = styled.div`
   border-radius: 5px;
   /* Color the border and text with theme.main */
   background: ${theme.colors.white};
+  `}
+`
 
+export const FooterSection = styled.section`
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+  ${media.lessThan('medium')`
+    margin-top: 20%;
   `}
 `
