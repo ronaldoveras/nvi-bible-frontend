@@ -1,7 +1,10 @@
 import { createGlobalStyle, css} from 'styled-components'
 import media from 'styled-media-query'
+import theme from "./theme"
 
-const GlobalStyle = createGlobalStyle`
+type ThemeType = typeof theme
+
+const GlobalStyle = createGlobalStyle<{ theme : ThemeType}>`
 /* poppins-300 - latin */
 @font-face {
   font-family: 'Poppins';

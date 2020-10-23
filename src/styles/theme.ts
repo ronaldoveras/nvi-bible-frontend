@@ -1,4 +1,4 @@
-export default {
+const theme = {
   grid: {
     container: '130rem',
     gutter: '3.2rem'
@@ -39,13 +39,9 @@ export default {
     large: '6.0rem',
     xlarge: '6.4rem',
     xxlarge: '12.8rem'
-  },
-
-  layout : {
-    margin: "auto",
-    maxWidth: "98%",
-    display: "block",
-    height: "auto"
   }
   
 }
+export default theme
+
+
